@@ -53,6 +53,7 @@
       "description": "Select data format (e.g., json)",
       "helptext": "<p><strong>Data Format:</strong> Select the format of the data stored in the kafka topic. Supported formats:</p><ul><li><strong>JSON:</strong> Standard JSON format, typically one object per file.<code>{<br/>&nbsp;&nbsp;\"id\": 1,<br/>&nbsp;&nbsp;\"name\": \"Alice\",<br/>&nbsp;&nbsp;\"email\": \"abc@xyz.com\"<br/>}</code></li><li><strong>JSONL:</strong> JSON Lines format with one JSON object per line, suitable for large datasets.<code>{\"id\": 1, \"name\": \"Alice\", \"email\": \"alice@example.com\"}<br/>{\"id\": 2, \"name\": \"Bob\", \"email\": \"bob@example.com\"}</code></li><li><strong>Parquet:</strong> A binary, columnar format optimized for efficient storage. Not human-readable.</li><li><strong>CSV:</strong> Comma-separated values format for tabular data.<code>id,name,email<br/>1,Alice,alice@example.com<br/>2,Bob,bob@example.com</code></li></ul><p>Select the format that matches the data files in the bucket.</p>",
       "default": "json",
+      "format": "hidden",
       "uiIndex": 5
     }
   },

@@ -7,6 +7,7 @@
     "source_kafka_broker_servers": {
       "title": "Kafka Brokers",
       "type": "string",
+      "pattern": "^(([a-zA-Z0-9.-]+|\\[[a-fA-F0-9:]+\\]):[0-9]{1,5})(,([a-zA-Z0-9.-]+|\\[[a-fA-F0-9:]+\\]):[0-9]{1,5})*$",
       "description": "Enter Kafka broker addresses in the format: broker1-hostname:port,broker2-hostname:port",
       "helptext": "<p><strong>Kafka Broker Address Format:</strong> Enter the broker addresses in the following format:<code>&lt;broker1-hostname&gt;:&lt;port&gt;,&lt;broker2-hostname&gt;:&lt;port&gt;,&lt;broker3-hostname&gt;:&lt;port&gt;</code></p><p><em>Example:</em> <code>broker1.example.com:9092,broker2.example.com:9092,broker3.example.com:9092</code></p><p>Ensure each brokers hostname and port are correct, separated by commas.</p>",
       "uiIndex": 1

@@ -7,7 +7,7 @@
     "type": "source",
     "tenant": "single",
     "version": "1.0.0",
-    "category": "Stream",
+    "category": "stream",
     "technology": "scala",
     "runtime": "flink",
     "licence": "MIT",

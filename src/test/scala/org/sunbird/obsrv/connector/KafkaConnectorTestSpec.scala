@@ -5,7 +5,7 @@ import org.scalatest.Matchers._
 import org.sunbird.obsrv.connector.source.IConnectorSource
 import scala.collection.JavaConverters._
 
-class KafkaConnectorTestSpec extends BaseFlinkConnectorSpec with Serializable {
+class KafkaConnectorTestSpec extends BaseFlinkSourceConnectorSpec with Serializable {
 
   val customKafkaConsumerProperties: Map[String, String] = Map[String, String]("auto.offset.reset" -> "earliest", "group.id" -> "test-connector-group")
   implicit val embeddedKafkaConfig: EmbeddedKafkaConfig =
@@ -29,16 +29,16 @@ class KafkaConnectorTestSpec extends BaseFlinkConnectorSpec with Serializable {
   }
 
   def createTestTopics(): Unit = {
-    List("sb-knowlg-topic").foreach(EmbeddedKafka.createCustomTopic(_))
+    EmbeddedKafka.createCustomTopic(topic = "test-kafka-topic")
   }
 
   override def getConnectorName(): String = "KafkaConnector"
 
-  override def getConnectorSource(): IConnectorSource = new KafkaConnectorSource()
+  override def getConnector(): IConnectorSource = new KafkaConnectorSource()
 
   override def testFailedEvents(events: java.util.List[String]): Unit = {
     events.size() should be (1)
-    events.asScala.head should be ("""{"error":{"error_code":"JSON_FORMAT_ERR","error_msg":"Not a valid json"},"event":"{\"name\":\"/v1/sys/health\",\"context\":{\"trace_id\":\"7bba9f33312b3dbb8b2c2c62bb7abe2d\"","connector_ctx":{"connector_id":"kafka-connector","dataset_id":"d1","connector_instance_id":"c1","connector_type":"source","data_format":"json","entryTopic":"ingest","state":{},"stats":{}}}""")
+    events.asScala.head should be ("""{"error":{"error_code":"JSON_FORMAT_ERR","error_msg":"Not a valid json"},"event":"{\"name\":\"/v1/sys/health\",\"context\":{\"trace_id\":\"7bba9f33312b3dbb8b2c2c62bb7abe2d\"","connector_ctx":{"connector_id":"kafka-connector","dataset_id":"d1","connector_instance_id":"c1","connector_type":"source","entryTopic":"ingest","state":{},"stats":{},"datasetTopic":"d1-events"}}""")
   }
 
   override def testSuccessEvents(events: java.util.List[String]): Unit = {
@@ -47,7 +47,7 @@ class KafkaConnectorTestSpec extends BaseFlinkConnectorSpec with Serializable {
 
   override def getConnectorConfigFile(): String = "test-config.json"
 
-  override def getSourceConfig(): Map[String, AnyRef] = {
+  override def getConnectorConfig(): Map[String, AnyRef] = {
     Map(
       "source_kafka_broker_servers" -> "localhost:9093",
       "source_kafka_consumer_id" -> "kafka-connector",
@@ -57,4 +57,5 @@ class KafkaConnectorTestSpec extends BaseFlinkConnectorSpec with Serializable {
     )
   }
 
+  override def validateMetrics(metrics: Map[String, Long]): Unit = {}
 }

@@ -32,7 +32,7 @@ jobs:
     - name: 🔨 Build job-sdk-scala
       run: |
         cd job-sdk-scala
-        mvn clean install
+        mvn clean install -DskipTests
 
     - name: 🧱 Clone connector-sdk-scala
       run: git clone https://github.com/Sanketika-Obsrv/connector-sdk-scala.git
@@ -40,7 +40,7 @@ jobs:
     - name: 🔨 Build connector-sdk-scala
       run: |
         cd connector-sdk-scala
-        mvn clean install
+        mvn clean install -DskipTests
 
     - name: 🚧 Build Kafka Connector
       run: mvn clean package -DskipTests

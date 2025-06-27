@@ -50,7 +50,7 @@ jobs:
 
     - name: 📦 Rename distribution tarball
       run: |
-        cp target/kafka-connector-1.0.0-distribution.tar.gz kafka-connector.tar.gz
+        cp target/kafka-connector-1.1.0-distribution.tar.gz kafka-connector.tar.gz
 
     - name: 🚀 Upload Release Asset
       uses: softprops/action-gh-release@v2
